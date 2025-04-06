@@ -1,6 +1,6 @@
-#!/usr/bin/env -S docker build . -t local/cross-compile-rust-armv7hf -f
+#!/usr/bin/env -S docker build . -t local/cc-armv7hf-rust -f
 
-# docker run --rm -v $PWD:/app local/cross-compile-rust-armv7hf
+# docker run --rm -v $PWD:/app local/cc-armv7hf-rust
 
 FROM rust:1.85.1-bookworm
  
