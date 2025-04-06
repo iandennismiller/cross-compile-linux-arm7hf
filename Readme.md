@@ -15,18 +15,21 @@ In one case, a 6-hour build that failed on Pi Zero took just 3 minutes on a lapt
 
 ## Usage
 
-### Rust
+### Rust (with Cargo)
 
-To cross-compile a rust project with cargo:
+To cross-compile a Rust project with Cargo:
 
 1. clone this repo
-2. change path to the rust project
-3. copy the rust dockerfile into the project
-4. run the dockerfile (chmod u+x if neceessary)
+2. run the dockerfile (chmod u+x if neceessary)
+3. change path to the rust project
+4. run the docker image to build the project
+5. the build result is in `target/armv7-unknown-linux-gnueabihf/release`
 
 ```bash
 git clone https://github.com/iandennismiller/cross-compile-linux-arm7hf
-cd MY_RUST_PROJECT
-cp ../cross-compile-linux-arm7hf/cross-compile-rust-arm7hf.dockerfile
+cd cross-compile-linux-arm7hf
 ./cross-compile-rust-arm7hf.dockerfile
+cd MY_RUST_PROJECT
+docker run --rm -v $PWD:/app local/cross-compile-rust-armv7hf
+ls target/armv7-unknown-linux-gnueabihf/release
 ```
