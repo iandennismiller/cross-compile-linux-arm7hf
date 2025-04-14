@@ -1,5 +1,4 @@
 #!/usr/bin/env -S docker build . -t local/cc-armv7hf-go -f
-
 # docker run --rm -v $PWD:/app local/cc-armv7hf-go
 
 FROM golang:1.24

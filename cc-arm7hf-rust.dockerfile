@@ -1,17 +1,10 @@
-#!/usr/bin/env -S docker build . -t local/cc-armv7hf-rust -f
-
+#!/usr/bin/env -S docker buildx build . --platform=linux/arm -t local/cc-armv7hf-rust -f
 # docker run --rm -v $PWD:/app local/cc-armv7hf-rust
 
-FROM rust:1.85.1-bookworm
- 
-RUN apt update && apt upgrade -y 
-RUN apt install -y g++-arm-linux-gnueabihf libc6-dev-armhf-cross
- 
-RUN rustup target add armv7-unknown-linux-gnueabihf 
-RUN rustup toolchain install --force-non-host stable-armv7-unknown-linux-gnueabihf
+FROM arm32v7/rust:1.86-bookworm
+
+RUN rustup toolchain install stable-armv7-unknown-linux-gnueabihf
 
 WORKDIR /app
- 
-ENV CARGO_TARGET_ARMV7_UNKNOWN_LINUX_GNUEABIHF_LINKER=arm-linux-gnueabihf-gcc CC_armv7_unknown_Linux_gnueabihf=arm-linux-gnueabihf-gcc CXX_armv7_unknown_linux_gnueabihf=arm-linux-gnueabihf-g++
- 
-CMD [ "cargo", "build", "--release", "--locked", "--target", "armv7-unknown-linux-gnueabihf" ]
+  
+CMD [ "cargo", "build", "--release" ]
